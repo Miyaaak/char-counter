@@ -3,28 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <title>文字数カウンター</title>
+
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    textarea {
+      width: 100%;
+      height: 250px;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+
+    input[type="number"] {
+      padding: 6px 10px;
+      font-size: 16px;
+      width: 120px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .info {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    /* 進捗バー */
+    #bar-bg {
+      width: 100%;
+      height: 12px;
+      background: #ddd;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+
+    #bar {
+      height: 12px;
+      width: 0%;
+      background: #4caf50;
+      border-radius: 6px;
+      transition: width 0.2s;
+    }
+  </style>
 </head>
+
 <body>
+  <h1>文字数カウンター</h1>
 
-  <!-- 最大文字数の入力欄 -->
-  <p>
-    最大文字数：<input id="max" type="number" placeholder="例：300" style="width:120px;">
-  </p>
+  <div id="container">
+    <p>
+      最大文字数：
+      <input id="max" type="number" placeholder="例：300">
+    </p>
 
-  <!-- テキスト入力欄 -->
-  <textarea id="text" placeholder="ここに入力" style="width:100%; height:300px;"></textarea>
+    <textarea id="text" placeholder="ここに入力"></textarea>
 
-  <!-- 現在の文字数 -->
-  <p>文字数：<span id="count">0</span></p>
+    <p class="info">文字数：<span id="count">0</span></p>
+    <p class="info">割合：<span id="percent">0</span>%</p>
 
-  <!-- 割合表示 -->
-  <p>割合：<span id="percent">0</span>%</p>
+    <!-- 進捗バー -->
+    <div id="bar-bg">
+      <div id="bar"></div>
+    </div>
+  </div>
 
   <script>
     const text = document.getElementById('text');
     const count = document.getElementById('count');
     const max = document.getElementById('max');
     const percent = document.getElementById('percent');
+    const bar = document.getElementById('bar');
 
     function update() {
       const length = text.value.length;
@@ -34,16 +104,24 @@
 
       if (maxValue > 0) {
         const ratio = (length / maxValue) * 100;
-        percent.textContent = ratio.toFixed(1); // 小数1桁
+        percent.textContent = ratio.toFixed(1);
+
+        bar.style.width = Math.min(ratio, 100) + "%";
+
+        // 進捗バーの色変化
+        if (ratio < 70) bar.style.background = "#4caf50";
+        else if (ratio < 100) bar.style.background = "#ff9800";
+        else bar.style.background = "#f44336";
       } else {
         percent.textContent = 0;
+        bar.style.width = "0%";
       }
     }
 
     text.addEventListener('input', update);
     max.addEventListener('input', update);
   </script>
-
 </body>
 </html>
+
 
