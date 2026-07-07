@@ -1,43 +1,64 @@
 # char-counter
-# 文字数カウンター（Character Counter）
+# 文字数カウンター（Char Counter）
 
-シンプルな文字数カウンター Web アプリです。  
-テキストを入力すると、リアルタイムで文字数を表示します。
+入力した文章の **文字数・単語数・割合・残り文字数** をリアルタイムで表示する Web アプリです。  
+最大文字数を自由に設定でき、進捗バーやダークモードなどの UI 機能も備えています。
 
----
-
-## 📌 公開ページ
-GitHub Pages で公開しています：
-
+GitHub Pages で公開中：  
 https://miyaaak.github.io/char-counter/
 
+---
+
+##  主な機能
+
+###  文字数カウント
+入力した文字数をリアルタイムで表示。
+
+###  単語数カウント
+スペース区切りで単語数を自動計算。
+
+###  最大文字数の設定
+任意の最大文字数を入力可能。
+
+###  割合表示
+現在の文字数が最大値の何％かを表示。
+
+###  残り文字数表示
+最大値まであと何文字入力できるかを表示。
+
+###  進捗バー（色変化）
+- 〜70%：緑  
+- 〜100%：オレンジ  
+- 超過：赤  
+
+視覚的に分かりやすい進捗バー。
+
+###  ダークモード
+ワンクリックでライト／ダークを切り替え。
+
+###  クリアボタン
+入力内容をで消去。
+
+###  自動保存（localStorage）
+ページを閉じても入力内容が保持される。
 
 ---
 
-## 🧰 機能
-- 入力した文字数をリアルタイムでカウント
-- シンプルで軽量な UI
-- スマホでも使えるレスポンシブデザイン（textarea を大きめに設定）
+##  使用技術
+
+- HTML  
+- CSS  
+- JavaScript（Vanilla JS）  
+- GitHub Pages（ホスティング）
 
 ---
 
-## 🖥 使用技術
-- HTML
-- JavaScript（Vanilla JS）
-
----
-
-## 📄 コード概要
+##  コード概要（主要部分）
 
 ```html
-<textarea id="text" placeholder="ここに入力" style="width:100%; height:300px;"></textarea>
+<textarea id="text"></textarea>
 <p>文字数：<span id="count">0</span></p>
-
-<script>
-  const text = document.getElementById('text');
-  const count = document.getElementById('count');
-
-  text.addEventListener('input', () => {
-    count.textContent = text.value.length;
-  });
-</script>
+<p>単語数：<span id="words">0</span></p>
+<p>割合：<span id="percent">0</span>%</p>
+<p>残り：<span id="remain">0</span>文字</p>
+<div id="bar-bg"><div id="bar"></div></div>
