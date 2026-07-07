@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>文字数カウンター</title>
+</head>
+<body>
+  <textarea id="text" placeholder="ここに入力"></textarea>
+  <p>文字数：<span id="count">0</span></p>
+
+  <script>
+    const text = document.getElementById('text');
+    const count = document.getElementById('count');
+
+    text.addEventListener('input', () => {
+      count.textContent = text.value.length;
+    });
+  </script>
+</body>
+</html>
