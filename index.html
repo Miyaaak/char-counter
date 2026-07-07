@@ -134,7 +134,6 @@
     <textarea id="text" placeholder="ここに入力"></textarea>
 
     <p class="info">文字数：<span id="count">0</span></p>
-    <p class="info">行数：<span id="lines">1</span></p>
     <p class="info">単語数：<span id="words">0</span></p>
     <p class="info">割合：<span id="percent">0</span>%</p>
     <p class="info">残り：<span id="remain">0</span>文字</p>
@@ -154,7 +153,6 @@
     const percent = document.getElementById('percent');
     const remain = document.getElementById('remain');
     const bar = document.getElementById('bar');
-    const lines = document.getElementById('lines');
     const words = document.getElementById('words');
     const clearBtn = document.getElementById('clearBtn');
     const darkBtn = document.getElementById('darkBtn');
@@ -170,9 +168,6 @@
       localStorage.setItem("text", value);
 
       count.textContent = length;
-
-      // 行数
-      lines.textContent = value.split(/\n/).length;
 
       // 単語数（簡易）
       words.textContent = value.trim() === "" ? 0 : value.trim().split(/\s+/).length;
