@@ -114,9 +114,10 @@
       background: #43a047;
     }
 
+    /* ダークモードだけ右寄せ */
     #darkBtn {
+      float: right;
       background: #333;
-      margin-left: 10px;
     }
 
     #darkBtn:hover {
@@ -136,6 +137,9 @@
       button {
         width: 100%;
         margin-top: 10px;
+      }
+      #darkBtn {
+        float: none; /* スマホでは縦並びに戻す */
       }
     }
   </style>
@@ -161,12 +165,11 @@
       <div id="bar"></div>
     </div>
 
+    <!-- ボタンの順番を変更済み -->
     <button id="clearBtn">入力をクリア</button>
-    <button id="darkBtn">ダークモード</button>
-
-    <!-- シェア機能 -->
     <button id="copyBtn">コピー</button>
     <button id="downloadBtn">ダウンロード</button>
+    <button id="darkBtn">ダークモード</button>
   </div>
 
   <script>
