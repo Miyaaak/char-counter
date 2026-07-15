@@ -167,10 +167,6 @@
     <!-- シェア機能 -->
     <button id="copyBtn">コピー</button>
     <button id="downloadBtn">ダウンロード</button>
-
-    <!-- Undo / Redo -->
-    <button id="undoBtn">Undo</button>
-    <button id="redoBtn">Redo</button>
   </div>
 
   <script>
@@ -185,17 +181,6 @@
     const darkBtn = document.getElementById('darkBtn');
     const copyBtn = document.getElementById('copyBtn');
     const downloadBtn = document.getElementById('downloadBtn');
-    const undoBtn = document.getElementById('undoBtn');
-    const redoBtn = document.getElementById('redoBtn');
-
-    // Undo / Redo 用スタック
-    let undoStack = [];
-    let redoStack = [];
-
-    function pushUndo() {
-      undoStack.push(text.value);
-      if (undoStack.length > 100) undoStack.shift();
-    }
 
     // 保存された内容を復元
     text.value = localStorage.getItem("text") || "";
@@ -212,9 +197,6 @@
     function update() {
       const value = text.value;
       const length = value.length;
-
-      // Undo スタックに追加
-      pushUndo();
 
       // 保存
       localStorage.setItem("text", value);
@@ -272,24 +254,6 @@
       a.download = "text.txt";
       a.click();
       URL.revokeObjectURL(url);
-    });
-
-    // Undo
-    undoBtn.addEventListener('click', () => {
-      if (undoStack.length > 0) {
-        redoStack.push(text.value);
-        text.value = undoStack.pop();
-        update();
-      }
-    });
-
-    // Redo
-    redoBtn.addEventListener('click', () => {
-      if (redoStack.length > 0) {
-        undoStack.push(text.value);
-        text.value = redoStack.pop();
-        update();
-      }
     });
 
     update();
